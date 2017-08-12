@@ -1,19 +1,15 @@
 // @flow
 
-import type Words from './words/reducer';
+import words from './words/initialState';
+
+import type { Words } from './words/initialState';
 
 export type State = {
     +words: Words
 }
 
 export default {
-    words: {
-        tokens: 'John Smith went shopping to Tescos with his housemate'.split(' '),
-        filters: {
-            neutral: true,
-            anonymous: false
-        }
-    },
+    words: words,
     filters: {
         neutral: true,
         anonymous: false

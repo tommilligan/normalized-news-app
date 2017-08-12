@@ -1,35 +1,59 @@
 // @flow
 
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Segment, Divider, Container } from 'semantic-ui-react'
+import { Button, Segment, Divider, Container, Input, Message } from 'semantic-ui-react'
 
-class Words extends Component {
-  render() {
-    const tokens = this.props.tokens.map(token => {
-        return <code>{token} </code>;
-    })
-    return (
-      <Container text>
-        <Segment padded>
-          {tokens}
-          <Divider horizontal>
-            <Button
-              color='violet'
-              content='Normalize'
-              icon='wizard'
-              labelPosition='left'
-            />
-          </Divider>
-          {tokens}
-        </Segment>
-      </Container>
-    )
-  }
+import type { Words, Token } from './initialState';
+import { wordsInputUpdate, wordsFilterNormalize } from './actions';
+
+interface IProps {
+  tokens: Array<Token>;
+  normalize: boolean;
+  errorMessage: string;
+  inputTextChanged: (string) => void;
+  toggleNormalize: () => void;
 }
 
-export default connect(state => {
-    return { tokens: state.words.tokens }
+const WordBox = (props: IProps) => {
+  const words = props.tokens.map((token, i) => {
+    const word = (props.normalize) ? token.normal : token.raw;
+    return <code key={i}>{word} </code>;
+  });
+  const errorBox = (props.errorMessage) ? (
+    <Message negative>
+      <Message.Header>We had troubling processing your input</Message.Header>
+      <p>Your last successful output is below. The server said: <b>{props.errorMessage}</b></p>
+    </Message>
+  ) : null;
+  return (
+    <Container text>
+      <Segment padded>
+        <Input fluid placeholder='He said to her...' onChange={(param, data) => props.inputTextChanged(data.value)}/>
+        <Divider horizontal />
+        <Button
+          color={props.normalize ? 'grey' : 'violet'}
+          content='Normalize'
+          icon='wizard'
+          labelPosition='left'
+          onClick={(param, data) => props.toggleNormalize()}
+        />
+        {errorBox}
+        <Divider horizontal />
+        {words}
+      </Segment>
+    </Container>
+  )
+}
+
+export default connect(({words}: Words) => {
+    return {
+      tokens: words.tokens,
+      normalize: words.normalize,
+      errorMessage: words.errorMessage
+    }
 }, {
-})(Words);
+  inputTextChanged: wordsInputUpdate,
+  toggleNormalize: wordsFilterNormalize
+})(WordBox);
 
