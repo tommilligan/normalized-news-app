@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { Header, Segment } from 'semantic-ui-react';
 
-import logo from './logo.svg';
 import './App.css';
 import Words from './words';
 
