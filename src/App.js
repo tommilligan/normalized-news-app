@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Header } from 'semantic-ui-react';
+import { Header, Segment } from 'semantic-ui-react';
 
 import logo from './logo.svg';
 import './App.css';
@@ -17,7 +17,16 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         */ }
-        <Header as='h1' textAlign='center'>normalized-news</Header>
+        <Segment inverted color='violet'>
+          <Header
+            inverted
+            as='h1'
+            textAlign='center'
+            style={{ marginBottom: '1.5em', marginTop: '1.5em' }}
+          >
+            normalized-news
+          </Header>
+        </Segment>
         <Words/>
       </div>
     );

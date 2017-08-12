@@ -2,9 +2,10 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Segment, Divider, Container, Input, Message } from 'semantic-ui-react'
+import { Button, Segment, Divider, Input, Message, Container } from 'semantic-ui-react'
 
-import type { Words, Token } from './initialState';
+import type { State } from '../initialState';
+import type { Token } from './initialState';
 import { wordsInputUpdate, wordsFilterNormalize } from './actions';
 
 interface IProps {
@@ -27,8 +28,8 @@ const WordBox = (props: IProps) => {
     </Message>
   ) : null;
   return (
-    <Container text>
-      <Segment padded>
+    <Segment vertical padded>
+      <Container text>
         <Input fluid placeholder='He said to her...' onChange={(param, data) => props.inputTextChanged(data.value)}/>
         <Divider horizontal />
         <Button
@@ -41,12 +42,12 @@ const WordBox = (props: IProps) => {
         {errorBox}
         <Divider horizontal />
         {words}
-      </Segment>
-    </Container>
+      </Container>
+    </Segment>
   )
 }
 
-export default connect(({words}: Words) => {
+export default connect(({words}: State) => {
     return {
       tokens: words.tokens,
       normalize: words.normalize,
