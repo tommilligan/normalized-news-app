@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Segment, Divider, Input, Message, Container } from 'semantic-ui-react'
+import { Button, Segment, Divider, Input, Message, Container, Checkbox } from 'semantic-ui-react'
 
 import type { State } from '../initialState';
 import type { Token } from './initialState';
@@ -19,7 +19,21 @@ interface IProps {
 const WordBox = (props: IProps) => {
   const words = props.tokens.map((token, i) => {
     const word = (props.normalize) ? token.normal : token.raw;
-    return <code key={i}>{word} </code>;
+    return (
+      <div
+        key={i}
+        style={{
+          display: 'inline-block',
+          fontFamily: 'monospace',
+          width: `${token.visualLength}ch`,
+          marginRight: `1ch`,
+          textAlign: 'center',
+          fontWeight: (token.normal === token.raw) ? 'normal' : 'bold'
+        }}
+      >
+        {word}
+      </div>
+    );
   });
   const errorBox = (props.errorMessage) ? (
     <Message negative>
@@ -29,19 +43,21 @@ const WordBox = (props: IProps) => {
   ) : null;
   return (
     <Segment vertical padded>
-      <Container text>
+      <Container text textAlign='center'>
         <Input fluid placeholder='He said to her...' onChange={(param, data) => props.inputTextChanged(data.value)}/>
         <Divider horizontal />
         <Button
           color={props.normalize ? 'grey' : 'violet'}
-          content='Normalize'
+          content={props.normalize ? 'Reveal' : 'Normalize'}
           icon='wizard'
           labelPosition='left'
           onClick={(param, data) => props.toggleNormalize()}
         />
         {errorBox}
         <Divider horizontal />
-        {words}
+          <div style={{display: 'flex', flexFlow: 'row wrap'}}>
+            {words}
+          </div>
       </Container>
     </Segment>
   )
