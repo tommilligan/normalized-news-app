@@ -2,18 +2,17 @@
 
 import { put, call, takeEvery } from 'redux-saga/effects';
 
-import GenderFluid from 'gender-fluid';
+import { normalize } from 'normalized-news';
 
 import { WORDS_INPUT_UPDATED, normalizedFetchSucceeded, normalizedFetchFailed } from './actions';
-
-const gender = new GenderFluid();
 
 function* fetchNormalizedText(action) {
     console.log("Fetching normalized text");
     try {
-        const normalizedText = yield call(gender.fluidize, action.data);
+        const normalizedText = yield call(normalize, action.data);
         yield put(normalizedFetchSucceeded(normalizedText));
     } catch (e) {
+        console.error(e);
         yield put(normalizedFetchFailed(e.message));
     }
 }

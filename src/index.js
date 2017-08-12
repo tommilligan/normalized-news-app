@@ -1,8 +1,5 @@
 // @flow
 
-// require('dotenv-safe').load();
-
-/* eslint-disable import/first */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -16,7 +13,6 @@ import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
 
 import 'semantic-ui-css/semantic.min.css';
-/* eslint-enable import/first */
 
 const sagaMiddleware = createSagaMiddleware(); 
 let store = {
