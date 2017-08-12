@@ -3,10 +3,10 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/tommilligan/normalized-news-gui.git"
+    "url": "git://github.com/tommilligan/normalized-news-app.git"
   },
-  "name": "normalized-news-gui",
-  "version": "0.1.0",
+  "name": "normalized-news-app",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.1",
