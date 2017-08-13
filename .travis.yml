@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "node"
+install:
+  - yarn install
+script:
+  - true
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - yarn build
+deploy:
+  - provider: heroku
+    skip_cleanup: true
+    api_key:
+      secure: $HEROKU_API_KEY
+    app:
+      develop: normalized-news-app-staging
+      master: normalized-news-app
+notifications:
+email: false
