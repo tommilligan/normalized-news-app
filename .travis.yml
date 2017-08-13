@@ -18,4 +18,4 @@ deploy:
       develop: normalized-news-app-staging
       master: normalized-news-app
 notifications:
-email: false
+  email: false
