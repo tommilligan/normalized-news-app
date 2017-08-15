@@ -17,6 +17,8 @@ function* fetchNormalizedText(action: WordsInputUpdatedAction): Generator<void, 
             console.error(e);
             yield put(normalizedFetchFailed(e.message));
         }
+    } else {
+        yield put(normalizedFetchSucceeded(""));
     }
 }
 
