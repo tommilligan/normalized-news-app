@@ -38,7 +38,7 @@
     "jest": "20.0.4",
     "normalized-news": "^0.0.5",
     "object-assign": "4.1.1",
-    "postcss-flexbugs-fixes": "3.0.0",
+    "postcss-flexbugs-fixes": "4.1.0",
     "postcss-loader": "2.0.6",
     "promise": "7.1.1",
     "react": "^15.6.1",
