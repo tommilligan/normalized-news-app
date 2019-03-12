@@ -7,6 +7,9 @@
   },
   "name": "normalized-news-app",
   "version": "0.0.1",
+  "engines": {
+    "node": "^8.15.1"
+  },
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.1",
